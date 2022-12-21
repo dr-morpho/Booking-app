@@ -10,7 +10,7 @@ func main() {
 	const conferenceTickets int = 50
 	var allTickets uint = 50
 	conferenceName := "Go Conference"
-	bookings := []string{}
+	var bookings = make([]map[string]string, 0)
 
 	utils.GreetUser(conferenceName, conferenceTickets, allTickets)
 	

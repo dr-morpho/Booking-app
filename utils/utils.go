@@ -2,6 +2,7 @@ package utils
 
 import (
 	"fmt"
+	"strconv"
 	"strings"
 )
 
@@ -11,11 +12,10 @@ func GreetUser(name string, tickets int, alltickets uint) {
 	fmt.Println("Get your tickets here to attend")
 }
 
-func GetFirstName(input []string) []string {
+func GetFirstName(input []map[string]string) []string {
 	firstNames := []string{}
 	for _, elem := range input {
-		names := strings.Fields(elem)
-		firstNames = append(firstNames, names[0])
+		firstNames = append(firstNames, elem["firstName"])
 	}
 	return firstNames
 }
@@ -74,9 +74,15 @@ func UserData (allTickets uint) (string, string, string, uint) {
 	return firstName, lastName, email, userTickets
 }
 
-func CalculationData(allTickets uint, userTickets uint, bookings []string, firstName string, lastName string )(uint, []string) {
+func CalculationData(allTickets uint, userTickets uint, bookings []map[string]string, firstName string, lastName string )(uint, []map[string]string) {
 	allTickets = allTickets - userTickets
-	bookings = append(bookings, firstName + " " + lastName)
+
+	var userData = make(map[string]string)
+	userData["firstName"] = firstName
+	userData["lastName"] = lastName
+	userData["userTickets"] = strconv.FormatUint(uint64(userTickets), 10)
+
+	bookings = append(bookings, userData)
 
 	return allTickets, bookings
 }
