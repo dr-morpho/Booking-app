@@ -6,11 +6,12 @@ import (
 )
 
 
+
 func main() {
 	const conferenceTickets int = 50
 	var allTickets uint = 50
 	conferenceName := "Go Conference"
-	var bookings = make([]map[string]string, 0)
+	var bookings = make([]utils.DataUsers, 0)
 
 	utils.GreetUser(conferenceName, conferenceTickets, allTickets)
 	

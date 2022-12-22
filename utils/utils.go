@@ -2,9 +2,14 @@ package utils
 
 import (
 	"fmt"
-	"strconv"
 	"strings"
 )
+
+type DataUsers struct {
+	firstName string
+	lastName string 
+	userTickets uint
+}
 
 func GreetUser(name string, tickets int, alltickets uint) {
 	fmt.Printf("Hello and welcome to %v booking application!\n", name)
@@ -12,10 +17,10 @@ func GreetUser(name string, tickets int, alltickets uint) {
 	fmt.Println("Get your tickets here to attend")
 }
 
-func GetFirstName(input []map[string]string) []string {
+func GetFirstName(input []DataUsers) []string {
 	firstNames := []string{}
 	for _, elem := range input {
-		firstNames = append(firstNames, elem["firstName"])
+		firstNames = append(firstNames, elem.firstName)
 	}
 	return firstNames
 }
@@ -74,14 +79,13 @@ func UserData (allTickets uint) (string, string, string, uint) {
 	return firstName, lastName, email, userTickets
 }
 
-func CalculationData(allTickets uint, userTickets uint, bookings []map[string]string, firstName string, lastName string )(uint, []map[string]string) {
+func CalculationData(allTickets uint, userTickets uint, bookings []DataUsers, firstName string, lastName string )(uint, []DataUsers) {
 	allTickets = allTickets - userTickets
-
-	var userData = make(map[string]string)
-	userData["firstName"] = firstName
-	userData["lastName"] = lastName
-	userData["userTickets"] = strconv.FormatUint(uint64(userTickets), 10)
-
+	var userData = DataUsers {
+		firstName: firstName,
+		lastName: lastName,
+		userTickets: userTickets,
+	}
 	bookings = append(bookings, userData)
 
 	return allTickets, bookings
