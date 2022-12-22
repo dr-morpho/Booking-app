@@ -3,6 +3,7 @@ package utils
 import (
 	"fmt"
 	"strings"
+	"time"
 )
 
 type DataUsers struct {
@@ -89,4 +90,12 @@ func CalculationData(allTickets uint, userTickets uint, bookings []DataUsers, fi
 	bookings = append(bookings, userData)
 
 	return allTickets, bookings
+}
+
+func SendMail(userTickets uint, firtsName string, lastName string, email string) {
+	time.Sleep(10 * time.Second)
+	var mail = fmt.Sprintf("%v tickets for %v %v", userTickets, firtsName, lastName)
+	fmt.Println("####################################")
+	fmt.Printf("Sending mail:\n%v\nto adress %v\n", mail, email )
+	fmt.Println("####################################")
 }

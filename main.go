@@ -26,6 +26,7 @@ func main() {
 		fmt.Printf("User %v %v booked %v tickets, you will receive a confirmation email at %v.\n", firstName, lastName, userTickets, email)
 		fmt.Printf("The first names of bookings are: %v\n", utils.GetFirstName(bookings))
 		fmt.Printf("%v tickets remaining for %v\n", allTickets, conferenceTickets)
+		go utils.SendMail(userTickets, firstName, lastName, email)
 		// The end:
 		if allTickets == 0 {
 			fmt.Println("Tickets sold out")
